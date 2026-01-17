@@ -2,7 +2,11 @@
 
 body {
     font-family: 'Google Sans Flex', system-ui, sans-serif;
-    font-variable-settings: ROND '90';
+     font-variation-settings:
+          "slnt" 0,
+          "wdth" 100,
+          "GRAD" 0,
+          "ROND" 80;
 }
 
 .liquid-glass {
