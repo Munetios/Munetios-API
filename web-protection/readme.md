@@ -1,6 +1,6 @@
 # 🛡️ Munetios Web Protection
 
-© 2025 **Munetios**  
+© 2026 **Munetios**  
 Licensed under the **MIT License**
 
 Munetios Web Protection is a **lightweight, client-side JavaScript security layer**
