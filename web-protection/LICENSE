@@ -1,31 +1,89 @@
-# Creative Commons Attribution 4.0 International License
+Munetios License v1.5
 
 Copyright (c) 2026 Munetios
 
-This source code is licensed under the Creative Commons Attribution 4.0 International License.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated source code files (the “Software”), to use,
+copy, modify, fork, merge, publish, distribute, sublicense, and sell copies
+of the Software, and to permit persons to whom the Software is furnished to
+do so, subject to the conditions below.
 
-To view a copy of this license, visit:
-https://creativecommons.org/licenses/by/4.0/
+======================================================================
+PERMISSIONS
+======================================================================
 
-or send a letter to:
-Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+You may:
 
-## You are free to:
+- Copy and use the Software.
+- Modify the Software.
+- Fork the Software.
+- Distribute the Software.
+- Sell copies of the Software.
+- Change the license of your modified version.
 
-- **Share** — copy and redistribute the source code in any medium or format
-- **Adapt** — remix, transform, and build upon the source code for any purpose, even commercially
+If you modify the Software, you may apply a different license to your
+modifications, provided that you comply with the attribution and branding
+requirements below.
 
-## Under the following terms:
+======================================================================
+REQUIREMENTS
+======================================================================
 
-- **Attribution** — You must give appropriate credit to Munetios, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+1. License Notice
+   This license text must be included in all copies or substantial
+   portions of the Software.
 
-## Notices:
+2. Attribution
+   You must clearly state in documentation, source code, or legal notices:
 
-You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+   "Based on software by Munetios."
 
-No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+3. Modification Disclosure
+   If you modify the Software, you must indicate that changes were made.
+   You may not imply that Munetios endorses or sponsors your modified version.
 
----
+======================================================================
+PATENT GRANT
+======================================================================
 
-For more information about this license, see the full legal code at:
-https://creativecommons.org/licenses/by/4.0/legalcode
+Subject to the terms and conditions of this License, Munetios hereby grants
+you a perpetual, worldwide, non-exclusive, royalty-free patent license to
+make, have made, use, offer to sell, sell, import, and otherwise transfer
+the Software.
+
+======================================================================
+PATENT TERMINATION
+======================================================================
+
+If you initiate patent litigation against Munetios or any contributor
+alleging that the Software infringes a patent, then any patent rights
+granted to you under this License shall terminate immediately.
+
+======================================================================
+BRAND & TRADEMARK PROTECTION
+======================================================================
+
+The Munetios name, logo, icons, visual assets, product names, trademarks,
+and branding elements are NOT licensed under this License.
+
+You may not:
+
+- Use the Munetios name in your product name.
+- Use Munetios logos or brand assets.
+- Imply endorsement, affiliation, or sponsorship by Munetios.
+- Market derivative works as official Munetios software.
+
+Any use of Munetios branding requires explicit written permission.
+
+======================================================================
+DISCLAIMER
+======================================================================
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT,
+OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
