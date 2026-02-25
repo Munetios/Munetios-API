@@ -1,7 +1,7 @@
 # 🛡️ Munetios Web Protection
 
 © 2026 **Munetios**  
-Licensed under the **MIT License**
+Licensed under the **Munetios License v1.5**
 
 Munetios Web Protection is a **lightweight, client-side JavaScript security layer**
 designed to reduce exposure to **malicious domains, scam infrastructure, phishing links,
@@ -135,18 +135,6 @@ Please see [`SECURITY.md`](./SECURITY.md) for details on:
 - Responsible vulnerability disclosure
 - Supported versions
 - Security design principles
-
----
-
-## 🏷️ Attribution
-
-Use of Munetios Web Protection requires attribution to **Munetios**
-in documentation, source headers, or an about/help page where
-reasonably applicable.
-
-**Example attribution:**
-
-> This site is protected by Munetios Web Protection.
 
 ---
 
