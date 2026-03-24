@@ -1,6 +1,9 @@
 * {
         font-feature-settings: 'liga' 0;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
     font-family: 'Google Sans Flex', system-ui, sans-serif;
      font-variation-settings:
