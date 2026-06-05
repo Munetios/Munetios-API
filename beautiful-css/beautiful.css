@@ -2,6 +2,9 @@
 html {
   scroll-behavior: smooth;
 }
+html, body, button, input, textarea, select {
+    font-feature-settings: "ss01" 1;
+}
 body {
     font-family: 'Google Sans Flex', system-ui, sans-serif;
      font-variation-settings:
@@ -227,7 +230,6 @@ h1, h2, h3, h4, h5, h6 {
   src: url("https://api.munetios.com/fonts/google-sans-flex/googlesansflex.ttf")
     format("truetype");
   font-weight: 100 900;
-  font-feature-settings: "ss01" 1;
   unicode-range: U+000-5FF; /* Latin glyphs */
 }
 .material-symbols-rounded, .icon, icon {
