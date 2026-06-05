@@ -8,10 +8,16 @@ body {
           "slnt" 0,
           "wdth" 100,
           "GRAD" 0,
-          "ROND" 80;
+          "ROND" 60;
 
 }
-
+h1, h2, h3, h4, h5, h6 {
+       font-variation-settings:
+          "slnt" 0,
+          "wdth" 102,
+          "GRAD" 0,
+          "ROND" 80;
+}
 .liquid-glass {
        background:
     linear-gradient(
@@ -221,6 +227,7 @@ body {
   src: url("https://api.munetios.com/fonts/google-sans-flex/googlesansflex.ttf")
     format("truetype");
   font-weight: 100 900;
+  font-feature-settings: "ss01" 1;
   unicode-range: U+000-5FF; /* Latin glyphs */
 }
 .material-symbols-rounded, .icon, icon {
