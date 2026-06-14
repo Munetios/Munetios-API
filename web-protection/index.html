@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Munetios Web Protection Setup | Munetios API</title>
+  <meta
+    name="description"
+    content="Set up Munetios Web Protection, a lightweight client-side JavaScript security layer for blocking malicious domains, phishing links, scam infrastructure, cryptomining scripts, and invasive tracking."
+  />
+
+  <link rel="stylesheet" href="https://api.munetios.com/beautiful-css/beautiful.css" />
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --page-bg: #08051f;
+      --page-bg-2: #14083d;
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.76);
+      --soft: rgba(255, 255, 255, 0.12);
+      --soft-2: rgba(255, 255, 255, 0.18);
+      --accent: #a855f7;
+      --accent-2: #7c3aed;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #fb7185;
+      --code-bg: rgba(7, 5, 24, 0.82);
+      --radius: 28px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Munetios Sans", "Google Sans Flex", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(168, 85, 247, 0.34), transparent 34rem),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.22), transparent 30rem),
+        linear-gradient(135deg, var(--page-bg), var(--page-bg-2));
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: #d8b4fe;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      transform: translateY(-140%);
+      background: #ffffff;
+      color: #111827;
+      padding: 10px 14px;
+      border-radius: 999px;
+      z-index: 1000;
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 64px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 16px;
+      border: 1px solid var(--soft-2);
+      border-radius: 999px;
+      background: rgba(14, 10, 38, 0.68);
+      backdrop-filter: blur(2px) saturate(180%);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #7c3aed, #c084fc);
+      box-shadow: 0 12px 36px rgba(168, 85, 247, 0.38);
+      flex: 0 0 auto;
+    }
+
+    .brand span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 8px 14px;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 700;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .nav a:hover,
+    .button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+
+    .button.primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      box-shadow: 0 16px 42px rgba(124, 58, 237, 0.36);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 24px;
+      align-items: stretch;
+      padding: 48px 0 24px;
+    }
+
+    .hero-card,
+    .panel,
+    .feature-card,
+    .setup-card,
+    .callout {
+      border: 1px solid var(--soft-2);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(2px) saturate(180%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      border-radius: 42px;
+      padding: clamp(28px, 6vw, 56px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      border: 1px solid rgba(216, 180, 254, 0.34);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #e9d5ff;
+      background: rgba(168, 85, 247, 0.14);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.65rem, 8vw, 5.8rem);
+      max-width: 11ch;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .hero-text {
+      max-width: 760px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .stats {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stat {
+      border-radius: 28px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--soft-2);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    section {
+      scroll-margin-top: 110px;
+      margin-top: 24px;
+    }
+
+    .panel {
+      border-radius: 34px;
+      padding: clamp(22px, 4vw, 36px);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-header p {
+      max-width: 680px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.features {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .feature-card,
+    .setup-card {
+      border-radius: 28px;
+      padding: 22px;
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      border-radius: 18px;
+      background: rgba(168, 85, 247, 0.18);
+      border: 1px solid rgba(216, 180, 254, 0.28);
+      font-size: 1.35rem;
+    }
+
+    .feature-card p,
+    .setup-card p,
+    .callout p {
+      color: var(--muted);
+    }
+
+    .code-wrap {
+      position: relative;
+      margin-top: 16px;
+    }
+
+    pre {
+      margin: 0;
+      padding: 22px;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 22px;
+      background: var(--code-bg);
+      color: #f8fafc;
+      line-height: 1.55;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94rem;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(2px);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .copy-button:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .steps {
+      counter-reset: setup-step;
+      display: grid;
+      gap: 16px;
+    }
+
+    .setup-card {
+      position: relative;
+      padding-left: 76px;
+    }
+
+    .setup-card::before {
+      counter-increment: setup-step;
+      content: counter(setup-step);
+      position: absolute;
+      left: 22px;
+      top: 22px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      font-weight: 900;
+      box-shadow: 0 12px 34px rgba(168, 85, 247, 0.28);
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 16px 0 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+    }
+
+    .list li::before {
+      content: "✓";
+      color: #86efac;
+      font-weight: 900;
+    }
+
+    .callout {
+      display: flex;
+      gap: 16px;
+      border-radius: 28px;
+      padding: 20px;
+      border-color: rgba(245, 158, 11, 0.28);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .callout-icon {
+      font-size: 1.55rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 36px;
+      padding: 22px 4px 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 860px) {
+      .topbar {
+        align-items: flex-start;
+        border-radius: 28px;
+        flex-direction: column;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 28px;
+      }
+
+      .grid.features {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .site-shell {
+        width: min(100% - 20px, 1180px);
+      }
+
+      .hero-card,
+      .panel {
+        border-radius: 28px;
+      }
+
+      .nav a,
+      .button {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .setup-card {
+        padding-left: 22px;
+        padding-top: 74px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="site-shell">
+    <header class="topbar liquid-glass">
+      <a class="brand" href="https://api.munetios.com/" aria-label="Munetios API home">
+        <span class="brand-mark" aria-hidden="true">🛡️</span>
+        <span>Munetios API</span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#setup">Setup</a>
+        <a href="#features">Features</a>
+        <a href="#examples">Examples</a>
+        <a href="#license">License</a>
+        <a class="button primary" href="https://api.munetios.com/web-protection/protection.min.js">View script</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="home">
+        <div class="hero-card liquid-glass">
+          <p class="eyebrow">Privacy-first browser protection</p>
+          <h1>Munetios Web Protection</h1>
+          <p class="hero-text">
+            A lightweight, client-side JavaScript security layer designed to reduce exposure to malicious domains,
+            scam infrastructure, phishing links, cryptomining scripts, and invasive third-party tracking.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#setup">Start setup</a>
+            <a class="button" href="#examples">See examples</a>
+          </div>
+        </div>
+
+        <aside class="stats" aria-label="Protection highlights">
+          <div class="stat liquid-glass">
+            <strong>0</strong>
+            <span>Network requests from the protection script</span>
+          </div>
+          <div class="stat liquid-glass">
+            <strong>Client-side</strong>
+            <span>Runs directly in the browser</span>
+          </div>
+          <div class="stat liquid-glass">
+            <strong>No telemetry</strong>
+            <span>No analytics, cookies, fingerprinting, or tracking</span>
+          </div>
+        </aside>
+      </section>
+
+      <section id="setup" class="panel liquid-glass">
+        <div class="section-header">
+          <div>
+            <h2>Setup</h2>
+            <p>Add one script tag before the closing <code>&lt;/body&gt;</code> tag.</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <article class="setup-card">
+            <h3>Add the protection script</h3>
+            <p>Paste this into your HTML page before <code>&lt;/body&gt;</code>.</p>
+
+            <div class="code-wrap">
+              <button class="copy-button" data-copy="install-code">Copy</button>
+              <pre><code id="install-code">&lt;script src="https://api.munetios.com/web-protection/protection.min.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+          </article>
+
+          <article class="setup-card">
+            <h3>Optional strict mode</h3>
+            <p>
+              Strict mode can block common tracking and analytics providers. Place this config before the protection script.
+            </p>
+
+            <div class="code-wrap">
+              <button class="copy-button" data-copy="strict-code">Copy</button>
+              <pre><code id="strict-code">&lt;script&gt;
+  window.MunetiosProtection = {
+    mode: "strict",
+    warnYouTube: true
+  };
+&lt;/script&gt;
+&lt;script src="https://api.munetios.com/web-protection/protection.min.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+          </article>
+
+          <article class="setup-card">
+            <h3>Strict mode with YouTube warnings off</h3>
+            <p>Use this when you want strict blocking but do not want YouTube embed consent warnings.</p>
+
+            <div class="code-wrap">
+              <button class="copy-button" data-copy="youtube-code">Copy</button>
+              <pre><code id="youtube-code">&lt;script&gt;
+  window.MunetiosProtection = {
+    mode: "strict",
+    warnYouTube: false
+  };
+&lt;/script&gt;
+&lt;script src="https://api.munetios.com/web-protection/protection.min.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="section-header">
+          <div>
+            <h2>Key features</h2>
+            <p>Designed for simple protection without remote lookups or invasive behavior.</p>
+          </div>
+        </div>
+
+        <div class="grid features">
+          <article class="feature-card liquid-glass">
+            <div class="feature-icon">🚫</div>
+            <h3>Blocks risky domains</h3>
+            <p>Helps block known malicious, scam, phishing, compromised, and cryptomining domains.</p>
+          </article>
+
+          <article class="feature-card liquid-glass">
+            <div class="feature-icon">🔒</div>
+            <h3>Privacy-first</h3>
+            <p>No telemetry, analytics, cookies, fingerprinting, or background reporting.</p>
+          </article>
+
+          <article class="feature-card liquid-glass">
+            <div class="feature-icon">⚡</div>
+            <h3>Local behavior</h3>
+            <p>Runs entirely in the browser using locally bundled protection rules.</p>
+          </article>
+
+          <article class="feature-card liquid-glass">
+            <div class="feature-icon">🧠</div>
+            <h3>Deterministic</h3>
+            <p>Transparent client-side behavior without hidden server-side scoring.</p>
+          </article>
+
+          <article class="feature-card liquid-glass">
+            <div class="feature-icon">🎬</div>
+            <h3>Embed handling</h3>
+            <p>Supports privacy-first YouTube embed handling with optional user consent warnings.</p>
+          </article>
+
+          <article class="feature-card liquid-glass">
+            <div class="feature-icon">🧩</div>
+            <h3>Easy setup</h3>
+            <p>Drop in one script tag and configure only when your site needs stricter behavior.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="examples" class="panel liquid-glass">
+        <div class="section-header">
+          <div>
+            <h2>Examples</h2>
+            <p>Use these examples for normal websites, strict privacy setups, and attribution.</p>
+          </div>
+        </div>
+
+        <h3>Basic HTML page</h3>
+        <div class="code-wrap">
+          <button class="copy-button" data-copy="page-code">Copy</button>
+          <pre><code id="page-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Protected page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Protected by Munetios Web Protection&lt;/h1&gt;
+
+  &lt;script src="https://api.munetios.com/web-protection/protection.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <br />
+
+        <h3>Attribution example</h3>
+        <div class="code-wrap">
+          <button class="copy-button" data-copy="attribution-code">Copy</button>
+          <pre><code id="attribution-code">&lt;p&gt;
+  This site is protected by
+  &lt;a href="https://api.munetios.com/#webProtection"&gt;Munetios Web Protection&lt;/a&gt;.
+&lt;/p&gt;</code></pre>
+        </div>
+      </section>
+
+      <section id="license" class="panel liquid-glass">
+        <div class="section-header">
+          <div>
+            <h2>License and privacy</h2>
+            <p>Munetios Web Protection is built for privacy-first client-side protection.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div class="callout-icon" aria-hidden="true">⚠️</div>
+          <div>
+            <h3>Attribution required</h3>
+            <p>
+              Use of Munetios Web Protection requires attribution and a link to Munetios APIs.
+              Example: “This site is protected by Munetios Web Protection.”
+            </p>
+          </div>
+        </div>
+
+        <ul class="list">
+          <li>Runs entirely in the browser.</li>
+          <li>Performs no network requests from the protection script.</li>
+          <li>Collects no data of any kind.</li>
+          <li>Uses locally bundled blocklists.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 Munetios</span>
+      <span>Munetios Web Protection setup documentation</span>
+    </footer>
+  </div>
+
+  <script>
+    const copyButtons = document.querySelectorAll("[data-copy]");
+
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const targetId = button.getAttribute("data-copy");
+        const target = document.getElementById(targetId);
+
+        if (!target) {
+          return;
+        }
+
+        const text = target.innerText;
+
+        try {
+          await navigator.clipboard.writeText(text);
+          const originalText = button.innerText;
+          button.innerText = "Copied";
+          setTimeout(() => {
+            button.innerText = originalText;
+          }, 1200);
+        } catch (error) {
+          button.innerText = "Copy failed";
+          setTimeout(() => {
+            button.innerText = "Copy";
+          }, 1200);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
