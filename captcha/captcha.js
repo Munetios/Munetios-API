@@ -41,7 +41,7 @@
     }
 
     .captcha-input {
-      width: 100%;
+      width: 93%;
       height: 52px;
       padding: 0 16px;
       border-radius: 18px;
