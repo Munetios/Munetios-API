@@ -278,14 +278,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 }
-@font-face {
-  font-family: "Lexend";
-  src: url("https://api.munetios.com/fonts/lexend/lexend.ttf")
-    format("truetype");
-  font-weight: 100 900;
-  font-display: swap;
 
-}
 @font-face {
   font-family: "Poppins";
   src: url("https://api.munetios.com/fonts/poppins/Poppins-Regular.ttf")
