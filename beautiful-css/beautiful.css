@@ -230,6 +230,7 @@ h1, h2, h3, h4, h5, h6 {
   src: url("https://api.munetios.com/fonts/google-sans-flex/googlesansflex.ttf")
     format("truetype");
   font-style: normal;
+    font-feature-settings: "ss01" 1;
   font-weight: 100 900;
   font-display: swap;
 }
