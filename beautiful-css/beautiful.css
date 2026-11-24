@@ -226,6 +226,16 @@ h1, h2, h3, h4, h5, h6 {
 
 
 @font-face {
+  font-family: "Munetios UI v4 Font";
+  src: url("https://api.munetios.com/fonts/google-sans-flex/munetios-ui-v4-font.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 1 1000;
+  font-stretch: 25% 151%;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Google Sans Flex";
   src: url("https://api.munetios.com/fonts/google-sans-flex/googlesansflex.ttf")
     format("truetype");
