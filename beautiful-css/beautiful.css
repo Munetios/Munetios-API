@@ -227,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @font-face {
   font-family: "Munetios UI v4 Font";
-  src: url("https://api.munetios.com/fonts/google-sans-flex/munetios-ui-v4-font.ttf?v=a6ad212de851")
+  src: url("https://api.munetios.com/fonts/google-sans-flex/munetios-ui-v4-font.ttf?v=b1b507f89b40")
     format("truetype");
   font-style: normal;
   font-weight: 1 1000;
@@ -237,7 +237,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @font-face {
   font-family: "Google Sans Flex";
-  src: url("https://api.munetios.com/fonts/google-sans-flex/munetios-ui-v4-font.ttf?v=a6ad212de851")
+  src: url("https://api.munetios.com/fonts/google-sans-flex/munetios-ui-v4-font.ttf?v=b1b507f89b40")
     format("truetype");
   font-style: normal;
   font-weight: 1 1000;
